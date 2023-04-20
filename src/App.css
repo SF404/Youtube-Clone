@@ -1,38 +1,262 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --no-of-tiles-in-row: 4;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body {
+  background-color: #0f0f0f;
+  min-width: 100%;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #0f0f0f;
+  height: 56px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  z-index: 2050;
+}
+
+.header>div {
+  display: flex;
+  justify-content: center;
+  color: white;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+}
+
+.header span {
+  font-weight: 200;
+  padding: 7px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.header span:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  width: 105px;
+  padding-top: 4px;
+}
+
+.profileIcon {
+  width: 35px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.center form {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  width: 600px;
+  border-radius: 30px;
+}
+
+.formSubmitButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.search {
+  flex-grow: 1;
+  background-color: transparent;
+  color: whitesmoke;
+  outline: none;
+  border: none;
+  padding: 4px 16px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.center>form span {
+  padding: 6px 18px;
+  background-color: rgb(255, 255, 255, 0.1);
+  border-radius: 0 30px 30px 0;
+  color: whitesmoke;
+}
+
+.center>span {
+  background-color: rgb(255, 255, 255, 0.05);
+}
+
+.aside {
+  height: 100%;
+  width: 256px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 56px;
+}
+
+.main {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 56px;
+  margin-left: 256px;
+}
+
+.topLinks {
+  width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+  color: white;
+  overflow-x: scroll;
+}
+
+.topLinks>span {
+  background-color: rgba(255, 255, 255, 0.18);
+  padding: 0.4em 0.7em;
+  border-radius: 8px;
+  margin: 12px;
+  margin-left: 0;
+  cursor: pointer;
+  flex-wrap: nowrap;
+}
+
+.topLinks::-webkit-scrollbar{
+  display: none;
+}
+
+.topLinks>span:hover {
+  background-color: rgb(255, 255, 255, 0.25);
+}
+
+.videoTileContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+/* ----------- Video tile ----------  */
+
+.videoTile {
+  color: white;
+  flex-grow: 1;
+  width: calc(100% / 5);
+}
+
+@media only screen and (max-width:1280px) {
+  .videoTile {
+    width: calc(100% / 4);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@media only screen and (max-width:1000px) {
+  .aside {
+    display: none;
+  }
+
+  .center form {
+    width: 400px;
+  }
+
+  @media only screen and (max-width:720px) {
+    .videoTile {
+      width: calc(100% / 3);
+    }
+
+    .center form,
+    .center * {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width:480px) {
+    .videoTile {
+      width: calc(100% / 2);
+    }
+  }
+
+
+  .main {
+    margin-left: 0;
+  }
+}
+
+.thumbnail {
+  border-radius: 10px;
+  width: 100%;
+}
+
+.videoInfo {
+  display: flex;
+  padding: 6px 0;
+  gap: 1em;
+}
+
+.videoInfo>img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.information p {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.information p:hover {
+  opacity: 0.8;
+}
+
+.information {
+  font-size: 1em;
+  opacity: 0.8;
+}
+
+.sidebar {
+  background-color: var(--bg-black);
+  width: 100%;
+  z-index: 999;
+  flex-grow: 1;
+  padding: 1em;
   display: flex;
   flex-direction: column;
+  user-select: none;
+}
+
+.sidebar>div {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar>div:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sidebar>div>span:nth-child(1) {
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+.sidebar>div>span:nth-child(2) {
+  margin-left: 1em;
+}
+
+.sidebar>hr {
+  opacity: 0.2;
+  margin: 0.5em 0;
 }
